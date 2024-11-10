@@ -1,0 +1,61 @@
+.headerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; // Full width of the viewport
+  background-color: #333; // Background color
+  display: flex;
+  padding: 0.3rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; // Ensures header is on top of other content
+}
+.logo {
+  width: 4rem;
+  height: auto;
+  cursor: pointer;
+}
+
+ul {
+  flex: 1;
+  list-style: none;
+  text-align: right;
+}
+ul li {
+  display: inline-block;
+  margin: 0 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.navItem {
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+
+    &:hover {
+      color: #66b2ff;
+    }
+  }
+}
+
+button {
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #737373;
+  }
+}
