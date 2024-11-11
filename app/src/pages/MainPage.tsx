@@ -4,7 +4,7 @@ import './MainPage.scss';
 
 function MainPage() {
   return (
-    <div className="mainPageContainer">
+    <div className="main-page-container">
       <Header />
       <main>
         <h1>Home</h1>

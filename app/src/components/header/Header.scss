@@ -1,4 +1,4 @@
-.headerContainer {
+.header-container {
   position:relative;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@
   align-items: center;
   color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000; // Ensures header is on top of other content
+  z-index: 10;
 }
 .logo {
   width: 4rem;
@@ -30,7 +30,7 @@ ul li {
   cursor: pointer;
 }
 
-.navItem {
+.nav-item {
   a {
     color: #fff;
     text-decoration: none;
