@@ -1,22 +1,22 @@
 import { Link } from 'react-router-dom';
-import './Header.scss';
+import styles from './Header.module.scss';
 import logo from '../../assets/karabox_logo.svg';
 
 function Header() {
   return (
-    <div className="header-container">
-      <img src={logo} alt="" className="logo" />
+    <div className={styles['header-container']}>
+      <img src={logo} alt="" className={styles['logo']} />
 
       <ul>
-        <li className="nav-item">
+        <li className={styles['nav-item']}>
           <Link to="/">Home</Link>
         </li>
-        <li className="nav-item">
+        <li className={styles['nav-item']}>
           <Link to="/news">News</Link>
         </li>
       </ul>
 
-      <button className="sign-button">Sign In</button>
+      <button className={styles['sign-button']}>Sign In</button>
     </div>
   );
 }
