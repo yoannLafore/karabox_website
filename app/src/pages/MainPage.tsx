@@ -1,6 +1,7 @@
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import SlotBooking from '../components/slot_reservation/SlotBooking';
+import { SlotSelectorUI } from '../models/ui/slot_reservation/SlotSelectorUI';
 import styles from './MainPage.module.scss';
 
 function MainPage() {
@@ -19,7 +20,12 @@ function MainPage() {
           </div>
           <div className={styles['vertical-line']}></div>
           <div className={styles['slot-selector-container']}>
-            <SlotBooking />
+            <SlotBooking
+              timeSlotSelectorUI={new SlotSelectorUI([])}
+              onDayChange={() => {}}
+              onBookSlotClick={() => {}}
+              onTimeSlotClick={() => {}}
+            />
           </div>
         </div>
       </main>
