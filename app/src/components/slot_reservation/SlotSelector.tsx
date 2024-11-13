@@ -1,39 +1,27 @@
+import { TimeSlotUI } from '../../models/ui/slot_reservation/TimeSlotUI';
 import styles from './SlotSelector.module.scss';
-import TimeSlot, { TimeSlotStatus } from './time_slot/TimeSlot';
+import TimeSlot from './time_slot/TimeSlot';
+import { SlotSelectorUI } from '../../models/ui/slot_reservation/SlotSelectorUI';
 
-function onClick(status: TimeSlotStatus) {
-  console.log(status);
+interface SlotSelectorProps {
+  slotSelector: SlotSelectorUI;
+  onTimeSlotClick: (timeSlot: TimeSlotUI) => void;
 }
 
-function SlotSelector() {
-  return (
-    <div className={styles['slot-selector-container']}>
-      <TimeSlot
-        hour={10}
-        minute={0}
-        status={TimeSlotStatus.PAST}
-        onClick={onClick}
-      />
-      <TimeSlot
-        hour={10}
-        minute={30}
-        status={TimeSlotStatus.RESERVED}
-        onClick={onClick}
-      />
-      <TimeSlot
-        hour={11}
-        minute={0}
-        status={TimeSlotStatus.AVAILABLE}
-        onClick={onClick}
-      />
-      <TimeSlot
-        hour={11}
-        minute={30}
-        status={TimeSlotStatus.SELECTED}
-        onClick={onClick}
-      />
-    </div>
-  );
+function SlotSelector({ slotSelector, onTimeSlotClick }: SlotSelectorProps) {
+  console.log(slotSelector);
+
+  const rows = slotSelector.timeSlots.map((row, index) => {
+    return (
+      <div key={index} className={styles['slot-selector-row']}>
+        {row.map((timeSlot, index) => (
+          <TimeSlot key={index} timeSlot={timeSlot} onClick={onTimeSlotClick} />
+        ))}
+      </div>
+    );
+  });
+
+  return <div className={styles['slot-selector-container']}>{rows}</div>;
 }
 
 export default SlotSelector;

@@ -1,16 +1,29 @@
 .slot-selector-container {
   width: 100%;
-  max-width: 30rem;
-  height: 20rem;
-  border: 2px dashed #000000;
-  background-color: #ffffff;
+  max-width: 20rem;
+  height: 100%;
+  background-color: #e2e2e2;
   margin: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start; /* Align slots at the top of the container */
+  justify-content: flex-start; /* Adjust for top-left alignment if needed */
   color: #666;
   font-size: 1.2rem;
   text-align: center;
-  border-radius: 1rem;
-  flex: 1;
+  border-radius: 0.5rem;
+  flex-direction: column;
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 0.5rem; /* Optional padding for space inside the container */
+  // shadow
+  // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.slot-selector-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 0.5rem; /* Optional spacing between rows */
 }
