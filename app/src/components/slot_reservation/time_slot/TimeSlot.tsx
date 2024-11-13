@@ -1,17 +1,12 @@
 import styles from './TimeSlot.module.scss';
-
-enum TimeSlotStatus {
-  PAST = 'PAST', // Time slot is in the past
-  RESERVED = 'RESERVED', // Time slot is already reserved
-  AVAILABLE = 'AVAILABLE', // Time slot is available
-  SELECTED = 'SELECTED', // Time slot is selected
-}
+import {
+  TimeSlotUI,
+  TimeSlotStatus,
+} from '../../../models/ui/slot_reservation/TimeSlotUI';
 
 interface TimeSlotProps {
-  hour: number;
-  minute: number;
-  status: TimeSlotStatus;
-  onClick: (status: TimeSlotStatus) => void;
+  timeSlot: TimeSlotUI;
+  onClick: (timeSlot: TimeSlotUI) => void;
 }
 
 function getStatusClassNames(status: TimeSlotStatus) {
@@ -43,13 +38,13 @@ function formatTime(hour: number, minute: number) {
   return `${hourStr}:${minuteStr}`;
 }
 
-function TimeSlot({ hour, minute, status, onClick }: TimeSlotProps) {
-  const slotTimeStr = formatTime(hour, minute);
+function TimeSlot({ timeSlot, onClick }: TimeSlotProps) {
+  const slotTimeStr = formatTime(timeSlot.hour, timeSlot.minute);
 
   return (
     <div
-      className={`${styles['time-slot']} ${getStatusClassNames(status)}`}
-      onClick={() => onClick(status)}
+      className={`${styles['time-slot']} ${getStatusClassNames(timeSlot.status)}`}
+      onClick={() => onClick(timeSlot)}
     >
       <p>{slotTimeStr}</p>
     </div>
@@ -57,4 +52,3 @@ function TimeSlot({ hour, minute, status, onClick }: TimeSlotProps) {
 }
 
 export default TimeSlot;
-export { TimeSlotStatus };
