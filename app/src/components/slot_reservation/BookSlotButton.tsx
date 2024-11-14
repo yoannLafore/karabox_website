@@ -1,7 +1,11 @@
 import './BookSlotButton.module.scss';
 
-function BookSlotButton() {
-  return <button>Book Slot</button>;
+interface BookSlotButtonProps {
+  onClick: () => void;
+}
+
+function BookSlotButton({ onClick }: BookSlotButtonProps) {
+  return <button onClick={onClick}>Book Slot</button>;
 }
 
 export default BookSlotButton;
