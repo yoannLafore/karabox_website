@@ -1,0 +1,71 @@
+@import '../../styles/variables.scss';
+$media-max-width: 600px;
+
+.container {
+  background: linear-gradient(90deg, $accent-dark, $primary-dark);
+
+  color: $on-primary-light;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.description-container {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+
+  @media (max-width: $media-max-width) {
+    flex-direction: column;
+  }
+  flex-direction: row;
+
+  .description {
+    font-size: 1.5rem;
+    text-align: left;
+
+    @media (max-width: $media-max-width) {
+      text-align: center;
+    }
+  }
+
+  .karabox-picture {
+    max-width: 25rem;
+  }
+}
+
+.location-section-container {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: top;
+  padding: 2rem;
+
+  @media (max-width: $media-max-width) {
+    flex-direction: column-reverse;
+  }
+
+  p {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+
+  img {
+    max-width: 300px;
+  }
+
+  .location-description {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+    @media (max-width: $media-max-width) {
+      margin-left: 0;
+      margin-right: 0;
+
+      p {
+        text-align: center;
+      }
+    }
+  }
+}
