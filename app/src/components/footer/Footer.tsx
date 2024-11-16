@@ -19,7 +19,9 @@ function Footer() {
       </div>
       <div className={styles['sponsors']}></div>
       <div className={styles['contact-info']}>
-        <p className={styles['email']}>karabox@example.com</p>
+        <a className={styles['email']} href="mailto:karabox@example.com">
+          karabox@example.com
+        </a>
         <div className={styles['social-media']}>
           <Instagram />
         </div>
