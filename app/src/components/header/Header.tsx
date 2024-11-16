@@ -4,7 +4,7 @@ import logo from '../../assets/karabox_logo.svg';
 
 function Header() {
   return (
-    <div className={styles['header-container']}>
+    <header className={styles['header-container']}>
       <img src={logo} alt="" className={styles['logo']} />
 
       <ul>
@@ -17,7 +17,7 @@ function Header() {
       </ul>
 
       <button className={styles['sign-button']}>Sign In</button>
-    </div>
+    </header>
   );
 }
 

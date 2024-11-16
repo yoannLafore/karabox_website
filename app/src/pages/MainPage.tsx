@@ -1,3 +1,4 @@
+import Description from '../components/description/Description';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import SlotBooking from '../components/slot_reservation/SlotBooking';
@@ -10,13 +11,16 @@ function MainPage() {
       <Header />
       <main>
         <div className={styles['title']}>
-          <h1>Karaoke Box</h1>
-          <p>Welcome to the Karabox, the best place to sing!</p>
+          <h1>Take a Break, Take the Mic!</h1>
+          <p>
+            Grab a friend, take the stage, and let the music flow - completely
+            free, just for students on campus!
+          </p>
         </div>
 
         <div className={styles['main-page-content-container']}>
           <div className={styles['description-container']}>
-            <h1>Karabox description</h1>
+            <Description />
           </div>
           <div className={styles['vertical-line']}></div>
           <div className={styles['slot-selector-container']}>

@@ -1,8 +1,10 @@
+@import '../../styles/variables.scss';
+
 .slot-selector-container {
   width: 100%;
   max-width: 20rem;
   height: 100%;
-  background-color: #e2e2e2;
+  background: linear-gradient(-35deg, $accent-dark, $primary-dark);
   margin: 1rem;
   display: flex;
   align-items: flex-start; /* Align slots at the top of the container */
@@ -13,9 +15,8 @@
   border-radius: 0.5rem;
   flex-direction: column;
   overflow-y: auto; /* Enable vertical scrolling */
-  padding: 0.5rem; /* Optional padding for space inside the container */
-  // shadow
-  // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  box-shadow: 0 0 100px $accent-dark;
 }
 
 .slot-selector-row {

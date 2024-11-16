@@ -1,7 +1,18 @@
+@import '../styles/variables.scss';
+
 .title {
-  font-size: 1.5rem;
-  color: #333;
+  font-size: 1rem;
+  color: #ffffff;
   text-align: center;
+  background-color: $very-dark-accent;
+  padding: 1rem;
+  width: fit-content;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 1rem 1rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .main-page-container {
@@ -9,7 +20,7 @@
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  // background-color: #f5f5f5;
 }
 
 .main-page-content-container {
@@ -20,19 +31,18 @@
   margin: 20px;
   padding: 20px;
   flex: 1;
+  margin-inline: 10rem;
+
+  @media (max-width: 1400px) {
+    flex-direction: column-reverse;
+    margin-inline: 0;
+  }
 
   .description-container {
     font-size: 1.5rem;
-    color: #666;
+    color: $on-primary-light;
     text-align: center;
-    flex: 1;
-  }
-
-  .vertical-line {
-    width: 2px; /* Width of the line */
-    height: 40rem; /* Height of the line */
-    background-color: #484848; /* Color of the line */
-    margin: 0 10px; /* Optional margin for spacing */
+    flex: 2;
   }
 
   .slot-selector-container {
@@ -46,4 +56,6 @@ main {
   display: flex;
   flex-direction: column;
   flex: 1;
+  justify-content: center;
+  align-items: center;
 }
