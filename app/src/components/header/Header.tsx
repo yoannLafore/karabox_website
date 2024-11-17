@@ -16,7 +16,9 @@ function Header() {
         </li>
       </ul>
 
-      <button className={styles['sign-button']}>Sign In</button>
+      <Link to="/login">
+        <button className={styles['sign-button']}>Sign In</button>
+      </Link>
     </header>
   );
 }

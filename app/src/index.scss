@@ -33,6 +33,7 @@ a:hover {
 body {
   margin: 0;
   place-items: center;
+  min-height: 100vh;
 }
 
 header {
@@ -91,4 +92,15 @@ footer {
   align-items: center;
   padding: 1em 2em;
   background-color: $footer-background;
+}
+
+main {
+  flex: 1;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
 }
