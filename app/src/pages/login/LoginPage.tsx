@@ -1,10 +1,10 @@
+import Login from '../../components/auth/login/Login';
+
 function LoginPage() {
   return (
     <div>
       <main>
-        <button>Login with Google</button>
-        <button>Login with email</button>
-        <button>Create an account</button>
+        <Login onLoginSuccess={() => (window.location.href = '/')} />
       </main>
     </div>
   );
