@@ -9,8 +9,6 @@ interface SlotSelectorProps {
 }
 
 function SlotSelector({ slotSelector, onTimeSlotClick }: SlotSelectorProps) {
-  console.log(slotSelector);
-
   const rows = slotSelector.timeSlots.map((row, index) => {
     return (
       <div key={index} className={styles['slot-selector-row']}>
