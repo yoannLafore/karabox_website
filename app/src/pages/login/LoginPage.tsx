@@ -4,6 +4,7 @@ function LoginPage() {
       <main>
         <button>Login with Google</button>
         <button>Login with email</button>
+        <button>Create an account</button>
       </main>
     </div>
   );
