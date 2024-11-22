@@ -10,12 +10,11 @@ interface LoginProps {
 function Login({ onLoginSuccess }: LoginProps) {
   return (
     <div className={styles['login-menu']}>
-      <main>
-        <GoogleLoginButton onLoginSuccess={onLoginSuccess} />
-        <span className={styles['separator']}>or</span>
-        <EmailLogin onLoginSuccess={onLoginSuccess} />
-        <CreateAccountButton />
-      </main>
+      <h2>Welcome back</h2>
+      <GoogleLoginButton onLoginSuccess={onLoginSuccess} />
+      <span className={styles['separator']}>or</span>
+      <EmailLogin onLoginSuccess={onLoginSuccess} />
+      <CreateAccountButton />
     </div>
   );
 }

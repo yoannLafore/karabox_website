@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { loginWithEmail } from '../../../../services/firebaseAuthService';
 import EmailField from '../../email/EmailField';
+import styles from './EmailLogin.module.scss';
+import { getErrorMessage } from '../../../../services/firebaseErrorMessagesMap';
+import { FirebaseError } from 'firebase/app';
 
 interface EmailLoginProps {
   onLoginSuccess: () => void; // Callback when login is successful
@@ -18,7 +21,8 @@ function EmailLogin({ onLoginSuccess }: EmailLoginProps) {
       console.log('Logged in user:', user);
       onLoginSuccess();
     } catch (err) {
-      setError('Login failed. Please check your email and password.');
+      if (err instanceof FirebaseError) setError(getErrorMessage(err.code));
+      else setError('Failed to sign in. Please try again.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -26,14 +30,13 @@ function EmailLogin({ onLoginSuccess }: EmailLoginProps) {
   };
 
   return (
-    <div>
-      <h2>Email Login</h2>
+    <div className={styles['email-login']}>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <EmailField
         onValidated={(email, password) => {
           handleLogin(email, password);
         }}
-        validateLabel="Login"
+        validateLabel="Sign in"
         disabled={loading}
       />
     </div>

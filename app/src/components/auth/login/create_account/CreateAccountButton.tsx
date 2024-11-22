@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import LoginButton from '../../button/LoginButton';
+import styles from './CreateAccountButton.module.scss';
 
 function CreateAccountButton() {
   const navigate = useNavigate();
@@ -9,7 +9,12 @@ function CreateAccountButton() {
   };
 
   return (
-    <LoginButton label="Create an account" onClick={handleAccountCreation} />
+    <div className={styles['signup-prompt']}>
+      <span>Don't have an account yet?</span>
+      <button onClick={handleAccountCreation} className={styles['signup-link']}>
+        Create one!
+      </button>
+    </div>
   );
 }
 

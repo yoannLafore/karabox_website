@@ -1,0 +1,15 @@
+.signup-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  width: 18rem;
+  button {
+    border-radius: 0.2rem;
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+}

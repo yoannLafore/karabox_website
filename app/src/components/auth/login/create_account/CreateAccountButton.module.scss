@@ -1,0 +1,29 @@
+.signup-prompt {
+  font-size: 14px;
+  color: gray;
+  text-align: center;
+  margin-top: 1rem;
+
+  button {
+    all: unset;
+  }
+
+  .signup-link {
+    background: none;
+    border: none;
+    color: #42a5f5; // Link color
+    cursor: pointer;
+    padding: 0;
+    margin-left: 0.5rem;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
+  }
+}
