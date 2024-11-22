@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { loginWithGoogle } from '../../../services/firebaseAuthService';
 import LoginButton from '../button/LoginButton';
+import styles from './GoogleLoginButton.module.scss';
 
 interface GoogleLoginProps {
   onLoginSuccess: () => void;
@@ -8,31 +9,38 @@ interface GoogleLoginProps {
 
 function GoogleLoginButton({ onLoginSuccess }: GoogleLoginProps) {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleGoogleLogin = async () => {
     setLoading(true);
-    setError(null);
     try {
       const user = await loginWithGoogle();
       console.log('Logged in user:', user);
       onLoginSuccess();
     } catch (err) {
-      setError('Google login failed. Please try again.');
       console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
+  const label = (
+    <div className={styles['button-label']}>
+      <img
+        src="https://developers.google.com/identity/images/g-logo.png"
+        alt="Google logo"
+        className="google-icon"
+      />
+      <span>Sign in with Google</span>
+    </div>
+  );
+
   return (
-    <div>
+    <div className={styles['google-sign-in-button']}>
       <LoginButton
-        label="Login with Google"
+        label={label}
         onClick={handleGoogleLogin}
         loading={loading}
       />
-      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }

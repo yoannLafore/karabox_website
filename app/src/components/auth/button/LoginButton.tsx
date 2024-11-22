@@ -1,5 +1,5 @@
 interface AuthButtonProps {
-  label: string;
+  label: JSX.Element | string;
   onClick: () => void;
   loading?: boolean;
 }
@@ -7,7 +7,7 @@ interface AuthButtonProps {
 function LoginButton({ label, onClick, loading = false }: AuthButtonProps) {
   return (
     <button onClick={onClick} disabled={loading}>
-      {loading ? 'Loading...' : label}
+      {label}
     </button>
   );
 }

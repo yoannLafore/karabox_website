@@ -1,0 +1,32 @@
+.google-sign-in-button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  span {
+    margin-left: 0.5rem;
+    color: gray;
+  }
+
+  img {
+    max-width: 1rem;
+  }
+
+  button {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+}
+
+.button-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
