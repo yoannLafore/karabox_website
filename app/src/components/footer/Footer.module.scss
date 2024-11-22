@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables.scss' as variables;
 
 footer {
   display: flex;
@@ -26,7 +26,7 @@ footer {
     cursor: pointer;
 
     &:hover {
-      color: $on-footer;
+      color: variables.$on-footer;
     }
   }
 
@@ -35,7 +35,7 @@ footer {
     margin-left: 2rem;
 
     &:hover {
-      color: $on-footer;
+      color: variables.$on-footer;
     }
   }
 }
@@ -49,7 +49,7 @@ footer {
   .email {
     cursor: pointer;
     margin-left: 0.2rem;
-    color: $accent-light;
+    color: variables.$accent-light;
   }
 
   .social-media {

@@ -1,6 +1,4 @@
 import Description from '../components/description/Description';
-import Footer from '../components/footer/Footer';
-import Header from '../components/header/Header';
 import SlotBooking from '../components/slot_reservation/SlotBooking';
 import { SlotSelectorUI } from '../models/ui/slot_reservation/SlotSelectorUI';
 import styles from './MainPage.module.scss';
@@ -8,7 +6,6 @@ import styles from './MainPage.module.scss';
 function MainPage() {
   return (
     <div className={styles['main-page-container']}>
-      <Header />
       <main>
         <div className={styles['title']}>
           <h1>Take a Break, Take the Mic!</h1>
@@ -33,7 +30,6 @@ function MainPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

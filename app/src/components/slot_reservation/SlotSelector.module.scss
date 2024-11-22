@@ -1,10 +1,14 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables.scss' as variables;
 
 .slot-selector-container {
   width: 100%;
   max-width: 20rem;
   height: 100%;
-  background: linear-gradient(-35deg, $accent-dark, $primary-dark);
+  background: linear-gradient(
+    -35deg,
+    variables.$accent-dark,
+    variables.$primary-dark
+  );
   margin: 1rem;
   display: flex;
   align-items: flex-start; /* Align slots at the top of the container */
@@ -16,7 +20,7 @@
   flex-direction: column;
   overflow-y: auto; /* Enable vertical scrolling */
   padding: 0.5rem;
-  box-shadow: 0 0 100px $accent-dark;
+  box-shadow: 0 0 100px variables.$accent-dark;
 }
 
 .slot-selector-row {

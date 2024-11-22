@@ -1,10 +1,14 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables.scss' as variables;
 $media-max-width: 600px;
 
 .container {
-  background: linear-gradient(90deg, $accent-dark, $primary-dark);
+  background: linear-gradient(
+    90deg,
+    variables.$accent-dark,
+    variables.$primary-dark
+  );
 
-  color: $on-primary-light;
+  color: variables.$on-primary-light;
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -13,11 +17,11 @@ $media-max-width: 600px;
   display: flex;
   align-items: center;
   padding: 2rem;
+  flex-direction: row;
 
   @media (max-width: $media-max-width) {
     flex-direction: column;
   }
-  flex-direction: row;
 
   .description {
     font-size: 1.5rem;

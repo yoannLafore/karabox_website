@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import logo from '../../assets/karabox_logo.svg';
+import AccountButton from '../auth/account/AccountButton';
 
 function Header() {
   return (
@@ -16,7 +17,7 @@ function Header() {
         </li>
       </ul>
 
-      <button className={styles['sign-button']}>Sign In</button>
+      <AccountButton />
     </header>
   );
 }
