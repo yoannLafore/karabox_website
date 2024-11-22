@@ -1,4 +1,4 @@
-@import 'styles/variables.scss';
+@use 'styles/variables.scss' as variables;
 
 * {
   margin: 0;
@@ -14,7 +14,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: $primary-light;
+  background-color: variables.$primary-light;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -41,7 +41,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1.5em 2em;
-  background-color: $header-background;
+  background-color: variables.$header-background;
 }
 
 h1 {
@@ -56,12 +56,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: $accent-dark;
+  background-color: variables.$accent-dark;
   cursor: pointer;
   transition: border-color 0.25s;
 
   &:hover {
-    background-color: $very-dark-accent;
+    background-color: variables.$very-dark-accent;
   }
 }
 
@@ -78,9 +78,9 @@ img {
 body {
   background: linear-gradient(
     135deg,
-    $primary-dark,
-    $accent-light,
-    $primary-light
+    variables.$primary-dark,
+    variables.$accent-light,
+    variables.$primary-light
   );
   background-size: 200% 200%;
   background-position: 50% 100%;
@@ -91,7 +91,7 @@ footer {
   justify-content: center;
   align-items: center;
   padding: 1em 2em;
-  background-color: $footer-background;
+  background-color: variables.$footer-background;
 }
 
 main {
