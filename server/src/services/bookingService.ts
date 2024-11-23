@@ -103,4 +103,24 @@ async function bookSlot(data: SlotBookData): Promise<BookSlotResult> {
   }
 }
 
-export { getBookedSlotForDay, bookSlot };
+async function getSlot(slotId: string) {
+  const slot = await db.collection(SlotBook.collectionName).doc(slotId).get();
+  return SlotBook.fromFirebaseDoc(slot);
+}
+
+async function unbookSlot(slotId: string, userId: string) {
+  try {
+    const slot = await getSlot(slotId);
+
+    if (slot.data.userId !== userId) {
+      return false;
+    }
+
+    await db.collection(SlotBook.collectionName).doc(slotId).delete();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+export { getBookedSlotForDay, bookSlot, unbookSlot };

@@ -1,6 +1,10 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import { bookSlot, getBookedSlotForDay } from './services/bookingService';
+import {
+  bookSlot,
+  getBookedSlotForDay,
+  unbookSlot,
+} from './services/bookingService';
 import { SlotBookData } from './models/bookings/slotBookData';
 import dayjs from 'dayjs';
 import {
@@ -39,6 +43,29 @@ app.get(
     const result = await bookSlot(data);
 
     res.send(result.toJson());
+  },
+);
+
+app.get(
+  '/unbook-slot',
+  firebaseAuthMiddleware,
+  async (req: Request, res: Response) => {
+    const reqAuth = req as AuthRequest;
+    const userId = reqAuth.user.user_id;
+
+    const slotId = req.query.slotId as string;
+
+    console.log('slotId', slotId);
+
+    if (!slotId) {
+      return res
+        .status(400)
+        .send({ error: 'SlotId query parameter is required' });
+    }
+
+    const result = await unbookSlot(slotId, userId);
+
+    res.send({ success: result });
   },
 );
 
