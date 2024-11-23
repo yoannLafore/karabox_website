@@ -93,12 +93,10 @@ async function bookSlot(data: SlotBookData): Promise<BookSlotResult> {
     return BookSlotResult.fail(message);
   }
 
-  console.log(data.toDbJson());
-
   try {
     await db.collection(SlotBook.collectionName).add(data.toDbJson());
     return BookSlotResult.success();
-  } catch (e) {
+  } catch {
     return BookSlotResult.fail('Internal error');
   }
 }
@@ -118,7 +116,7 @@ async function unbookSlot(slotId: string, userId: string) {
 
     await db.collection(SlotBook.collectionName).doc(slotId).delete();
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 }

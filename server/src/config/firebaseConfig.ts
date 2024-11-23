@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_PATH || '';
-console.log(serviceAccountPath);
 
-var serviceAccount = require(serviceAccountPath);
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const serviceAccount = require(serviceAccountPath);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

@@ -1,9 +1,9 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
-import prettier from 'eslint-plugin-prettier';
+const js = require('@eslint/js');
+const globals = require('globals');
+const tseslint = require('typescript-eslint');
+const prettier = require('eslint-plugin-prettier');
 
-export default tseslint.config(
+module.exports = tseslint.config(
   { ignores: ['dist'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
@@ -17,6 +17,7 @@ export default tseslint.config(
     },
     rules: {
       'prettier/prettier': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 );
