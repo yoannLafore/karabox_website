@@ -21,4 +21,8 @@ export class BookSlotResult {
       message: this.message,
     };
   }
+
+  static fromApiResponse(res: any): BookSlotResult {
+    return new BookSlotResult(res.success, res.message);
+  }
 }
