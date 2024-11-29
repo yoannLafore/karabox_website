@@ -78,7 +78,12 @@ app.get('/get-booked-slots', async (req: Request, res: Response) => {
 
   try {
     const slots = await getBookedSlotForDay(date);
-    const slotsJson = slots.map((slot) => slot.data.toDbJson());
+    const slotsJson = slots.map((slot) => {
+      return {
+        id: slot.slotId,
+        data: slot.data.toDbJson(),
+      };
+    });
     res.send({ bookedSlots: slotsJson });
   } catch {
     return res.status(500).send({ error: 'Internal error' });
