@@ -1,9 +1,49 @@
+import { useEffect, useState } from 'react';
 import Description from '../components/description/Description';
 import SlotBooking from '../components/slot_reservation/SlotBooking';
 import { SlotSelectorUI } from '../models/ui/slot_reservation/SlotSelectorUI';
 import styles from './MainPage.module.scss';
+import { useQuery } from '@tanstack/react-query';
+import dayjs, { Dayjs } from 'dayjs';
+import { bookSlot, getBookings, unbookSlot } from '../services/bookingService';
+import { TimeSlotUI } from '../models/ui/slot_reservation/TimeSlotUI';
+import { useAuth } from '../hooks/auth/useAuth';
 
 function MainPage() {
+  const { user, token } = useAuth();
+
+  const [selectedDay, setSelectedDay] = useState<Dayjs>(dayjs());
+
+  const query = useQuery({
+    queryKey: ['bookedSlots', selectedDay],
+    queryFn: () => getBookings(selectedDay, null),
+  });
+
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlotUI | null>(
+    null,
+  );
+
+  const [slotSelector, setSlotSelector] = useState<SlotSelectorUI>(
+    SlotSelectorUI.empty(),
+  );
+
+  useEffect(() => {
+    if (query.data) {
+      let slotSelector = SlotSelectorUI.fromSlotBooksApi(
+        query.data,
+        dayjs(),
+        selectedDay,
+        user?.uid,
+      );
+
+      if (selectedTimeSlot) {
+        slotSelector = slotSelector.withSelectTimeSlot(selectedTimeSlot);
+      }
+
+      setSlotSelector(slotSelector);
+    }
+  }, [query.data, selectedDay, selectedTimeSlot, user?.uid]);
+
   return (
     <div className={styles['main-page-container']}>
       <main>
@@ -22,10 +62,64 @@ function MainPage() {
           <div className={styles['vertical-line']}></div>
           <div className={styles['slot-selector-container']}>
             <SlotBooking
-              timeSlotSelectorUI={new SlotSelectorUI([])}
-              onDayChange={() => {}}
-              onBookSlotClick={() => {}}
-              onTimeSlotClick={() => {}}
+              timeSlotSelectorUI={slotSelector}
+              onDayChange={(day) => {
+                setSelectedDay(day);
+                setSelectedTimeSlot(null);
+                // Refresh the query
+                query.refetch();
+              }}
+              onBookSlotClick={() => {
+                if (selectedTimeSlot) {
+                  if (!token) {
+                    // Navigate to login
+                    window.location.href = '/login';
+                    return;
+                  }
+
+                  if (slotSelector.isOwnReservedSelected()) {
+                    // Unbook the slot
+                    unbookSlot(selectedTimeSlot.id!, token!).then(
+                      () => {
+                        query.refetch();
+                      },
+                      (error) => {
+                        console.error(error);
+                      },
+                    );
+                  } else {
+                    bookSlot(
+                      selectedDay,
+                      selectedTimeSlot.hour,
+                      selectedTimeSlot.minute,
+                      token!,
+                    ).then(
+                      (result) => {
+                        if (!result.success) {
+                          alert('Failed to book slot : ' + result.message);
+                        }
+                        query.refetch();
+                      },
+                      (error) => {
+                        console.error(error);
+                      },
+                    );
+                  }
+
+                  setSelectedTimeSlot(null);
+                } else {
+                  alert('Please select a time slot');
+                }
+              }}
+              onTimeSlotClick={(timeSlot) => {
+                if (
+                  timeSlot.status === 'AVAILABLE' ||
+                  timeSlot.status === 'OWN_RESERVED'
+                ) {
+                  setSelectedTimeSlot(timeSlot);
+                  //setSlotSelector(slotSelector.withSelectTimeSlot(timeSlot));
+                }
+              }}
             />
           </div>
         </div>

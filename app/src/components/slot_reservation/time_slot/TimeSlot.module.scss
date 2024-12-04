@@ -2,9 +2,10 @@ $box-size: 4rem;
 
 $available-color: #000000;
 $reserved-color: #ff0000;
+$own-reserved-color: #6ac503;
 $past-color: #9c9c9c;
 
-$selected-border-color: #0800ff;
+$selected-border-color: #ff8800;
 
 .time-slot {
   width: $box-size;
@@ -31,6 +32,11 @@ $selected-border-color: #0800ff;
   &.reserved {
     background-color: $reserved-color;
     cursor: not-allowed;
+  }
+
+  &.own-reserved {
+    background-color: $own-reserved-color;
+    cursor: pointer;
   }
 
   &.past {

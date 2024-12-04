@@ -17,8 +17,8 @@ function getStatusClassNames(status: TimeSlotStatus) {
       return styles['reserved'];
     case TimeSlotStatus.AVAILABLE:
       return styles['available'];
-    case TimeSlotStatus.SELECTED:
-      return styles['selected'];
+    case TimeSlotStatus.OWN_RESERVED:
+      return styles['own-reserved'];
     default:
       return '';
   }
@@ -41,9 +41,11 @@ function formatTime(hour: number, minute: number) {
 function TimeSlot({ timeSlot, onClick }: TimeSlotProps) {
   const slotTimeStr = formatTime(timeSlot.hour, timeSlot.minute);
 
+  const selectedClass = timeSlot.selected ? styles['selected'] : '';
+
   return (
     <div
-      className={`${styles['time-slot']} ${getStatusClassNames(timeSlot.status)}`}
+      className={`${styles['time-slot']} ${getStatusClassNames(timeSlot.status)} ${selectedClass}`}
       onClick={() => onClick(timeSlot)}
     >
       <p>{slotTimeStr}</p>
