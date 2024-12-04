@@ -7,8 +7,11 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs, { Dayjs } from 'dayjs';
 import { bookSlot, getBookings } from '../services/bookingService';
 import { TimeSlotUI } from '../models/ui/slot_reservation/TimeSlotUI';
+import { useAuth } from '../hooks/auth/useAuth';
 
 function MainPage() {
+  const { token } = useAuth();
+
   const [selectedDay, setSelectedDay] = useState<Dayjs>(dayjs());
 
   const query = useQuery({
@@ -56,7 +59,29 @@ function MainPage() {
                 // Refresh the query
                 query.refetch();
               }}
-              onBookSlotClick={() => {}}
+              onBookSlotClick={() => {
+                if (selectedTimeSlot) {
+                  if (!token) {
+                    // Navigate to login
+                    window.location.href = '/login';
+                    return;
+                  }
+
+                  bookSlot(
+                    selectedDay,
+                    selectedTimeSlot.hour,
+                    selectedTimeSlot.minute,
+                    token!,
+                  ).then(
+                    () => {
+                      query.refetch();
+                    },
+                    (error) => {
+                      console.error(error);
+                    },
+                  );
+                }
+              }}
               onTimeSlotClick={(timeSlot) => {
                 if (timeSlot.status === 'AVAILABLE') {
                   setSelectedTimeSlot(timeSlot);
