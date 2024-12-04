@@ -15,6 +15,25 @@ class SlotSelectorUI {
     this.timeSlots = timeSlots;
   }
 
+  withSelectTimeSlot(selectedSlot: TimeSlotUI) {
+    const newTimeSlots = this.timeSlots.map((slots) =>
+      slots.map((slot) => {
+        if (
+          slot.hour === selectedSlot.hour &&
+          slot.minute === selectedSlot.minute
+        ) {
+          return slot.setSelected(true);
+        }
+        return slot.setSelected(false);
+      }),
+    );
+    return new SlotSelectorUI(newTimeSlots);
+  }
+
+  static empty() {
+    return new SlotSelectorUI([]);
+  }
+
   static fromSlotBooksApi(
     slotBooks: SlotBook[],
     currentTime: Dayjs,
@@ -47,7 +66,8 @@ class SlotSelectorUI {
         const currentMinute = currentTime.minute();
         if (
           (hour < currentHour ||
-            (hour === currentHour && minute < currentMinute)) &&
+            (hour === currentHour &&
+              minute + this.SLOT_LENGTH < currentMinute)) &&
           selectedDay.isSame(currentTime, 'day')
         ) {
           slots.push(new TimeSlotUI(hour, minute, TimeSlotStatus.PAST));
