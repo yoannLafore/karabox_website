@@ -42,7 +42,7 @@ function MainPage() {
 
       setSlotSelector(slotSelector);
     }
-  }, [query.data, selectedDay, token, selectedTimeSlot]);
+  }, [query.data, selectedDay, selectedTimeSlot, user?.uid]);
 
   return (
     <div className={styles['main-page-container']}>
