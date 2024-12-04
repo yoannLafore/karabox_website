@@ -17,6 +17,8 @@ function getStatusClassNames(status: TimeSlotStatus) {
       return styles['reserved'];
     case TimeSlotStatus.AVAILABLE:
       return styles['available'];
+    case TimeSlotStatus.OWN_RESERVED:
+      return styles['own-reserved'];
     default:
       return '';
   }

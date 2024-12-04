@@ -5,12 +5,12 @@ import { SlotSelectorUI } from '../models/ui/slot_reservation/SlotSelectorUI';
 import styles from './MainPage.module.scss';
 import { useQuery } from '@tanstack/react-query';
 import dayjs, { Dayjs } from 'dayjs';
-import { bookSlot, getBookings } from '../services/bookingService';
+import { bookSlot, getBookings, unbookSlot } from '../services/bookingService';
 import { TimeSlotUI } from '../models/ui/slot_reservation/TimeSlotUI';
 import { useAuth } from '../hooks/auth/useAuth';
 
 function MainPage() {
-  const { token } = useAuth();
+  const { user, token } = useAuth();
 
   const [selectedDay, setSelectedDay] = useState<Dayjs>(dayjs());
 
@@ -29,11 +29,20 @@ function MainPage() {
 
   useEffect(() => {
     if (query.data) {
-      setSlotSelector(
-        SlotSelectorUI.fromSlotBooksApi(query.data, dayjs(), selectedDay),
+      let slotSelector = SlotSelectorUI.fromSlotBooksApi(
+        query.data,
+        dayjs(),
+        selectedDay,
+        user?.uid,
       );
+
+      if (selectedTimeSlot) {
+        slotSelector = slotSelector.withSelectTimeSlot(selectedTimeSlot);
+      }
+
+      setSlotSelector(slotSelector);
     }
-  }, [query.data, selectedDay]);
+  }, [query.data, selectedDay, token, selectedTimeSlot]);
 
   return (
     <div className={styles['main-page-container']}>
@@ -56,6 +65,7 @@ function MainPage() {
               timeSlotSelectorUI={slotSelector}
               onDayChange={(day) => {
                 setSelectedDay(day);
+                setSelectedTimeSlot(null);
                 // Refresh the query
                 query.refetch();
               }}
@@ -67,25 +77,47 @@ function MainPage() {
                     return;
                   }
 
-                  bookSlot(
-                    selectedDay,
-                    selectedTimeSlot.hour,
-                    selectedTimeSlot.minute,
-                    token!,
-                  ).then(
-                    () => {
-                      query.refetch();
-                    },
-                    (error) => {
-                      console.error(error);
-                    },
-                  );
+                  if (slotSelector.isOwnReservedSelected()) {
+                    // Unbook the slot
+                    unbookSlot(selectedTimeSlot.id!, token!).then(
+                      () => {
+                        query.refetch();
+                      },
+                      (error) => {
+                        console.error(error);
+                      },
+                    );
+                  } else {
+                    bookSlot(
+                      selectedDay,
+                      selectedTimeSlot.hour,
+                      selectedTimeSlot.minute,
+                      token!,
+                    ).then(
+                      (result) => {
+                        if (!result.success) {
+                          alert('Failed to book slot : ' + result.message);
+                        }
+                        query.refetch();
+                      },
+                      (error) => {
+                        console.error(error);
+                      },
+                    );
+                  }
+
+                  setSelectedTimeSlot(null);
+                } else {
+                  alert('Please select a time slot');
                 }
               }}
               onTimeSlotClick={(timeSlot) => {
-                if (timeSlot.status === 'AVAILABLE') {
+                if (
+                  timeSlot.status === 'AVAILABLE' ||
+                  timeSlot.status === 'OWN_RESERVED'
+                ) {
                   setSelectedTimeSlot(timeSlot);
-                  setSlotSelector(slotSelector.withSelectTimeSlot(timeSlot));
+                  //setSlotSelector(slotSelector.withSelectTimeSlot(timeSlot));
                 }
               }}
             />

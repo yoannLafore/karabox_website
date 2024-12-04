@@ -30,6 +30,18 @@ class SlotSelectorUI {
     return new SlotSelectorUI(newTimeSlots);
   }
 
+  isOwnReservedSelected() {
+    return this.timeSlots.some((slots) =>
+      slots.some(
+        (slot) => slot.status === TimeSlotStatus.OWN_RESERVED && slot.selected,
+      ),
+    );
+  }
+
+  isSomeSelected() {
+    return this.timeSlots.some((slots) => slots.some((slot) => slot.selected));
+  }
+
   static empty() {
     return new SlotSelectorUI([]);
   }
@@ -38,6 +50,7 @@ class SlotSelectorUI {
     slotBooks: SlotBook[],
     currentTime: Dayjs,
     selectedDay: Dayjs,
+    userId: string | undefined,
   ) {
     const timeSlots: TimeSlotUI[][] = [];
 
@@ -75,13 +88,26 @@ class SlotSelectorUI {
         }
 
         // Check if the time slot is reserved
-        if (
-          slotBooks.some(
-            (slotBook) =>
-              slotBook.data.hours === hour && slotBook.data.minutes === minute,
-          )
-        ) {
-          slots.push(new TimeSlotUI(hour, minute, TimeSlotStatus.RESERVED));
+        const slotApi = slotBooks.find(
+          (slotBook) =>
+            slotBook.data.hours === hour && slotBook.data.minutes === minute,
+        );
+
+        if (slotApi) {
+          const own_reserved = slotApi.data.userId === userId;
+
+          slots.push(
+            new TimeSlotUI(
+              hour,
+              minute,
+              own_reserved
+                ? TimeSlotStatus.OWN_RESERVED
+                : TimeSlotStatus.RESERVED,
+              false,
+              slotApi.slotId,
+            ),
+          );
+
           continue;
         }
 

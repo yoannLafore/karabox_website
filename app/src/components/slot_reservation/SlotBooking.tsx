@@ -22,6 +22,10 @@ function SlotBooking({
   onTimeSlotClick,
   onBookSlotClick,
 }: SlotBookingProps) {
+  const slotButtonText = timeSlotSelectorUI.isOwnReservedSelected()
+    ? 'Unbook Slot'
+    : 'Book Slot';
+
   return (
     <div className={styles['slot-booking-container']}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -41,7 +45,11 @@ function SlotBooking({
         slotSelector={timeSlotSelectorUI}
         onTimeSlotClick={onTimeSlotClick}
       />
-      <BookSlotButton onClick={onBookSlotClick} />
+      <BookSlotButton
+        onClick={onBookSlotClick}
+        text={slotButtonText}
+        disabled={!timeSlotSelectorUI.isSomeSelected()}
+      />
     </div>
   );
 }

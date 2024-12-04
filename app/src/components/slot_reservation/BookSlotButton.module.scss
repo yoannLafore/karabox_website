@@ -9,4 +9,9 @@ button {
   border-radius: 1rem;
   margin: 1rem;
   transition: background-color 0.3s;
+
+  &:disabled {
+    background-color: #808080;
+    cursor: not-allowed;
+  }
 }
