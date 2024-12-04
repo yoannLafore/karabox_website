@@ -35,12 +35,13 @@ function MainPage() {
             <SlotBooking
               timeSlotSelectorUI={SlotSelectorUI.fromSlotBooksApi(
                 query.data ? query.data : [],
-                new Date(),
+                dayjs(),
+                selectedDay,
               )}
               onDayChange={(day) => {
                 setSelectedDay(day);
                 // Refresh the query
-                //query.refetch();
+                query.refetch();
               }}
               onBookSlotClick={() => {}}
               onTimeSlotClick={() => {}}
